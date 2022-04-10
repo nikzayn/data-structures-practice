@@ -1,17 +1,36 @@
 public class LargestElement {
-    // Efficient solution - Time Complexity - O(n)
+    // Time Complexity - O(n ^ 2)
+    // Space Complexity - O
     static int largestNaive(int arr[]) {
-        int index = 0;
         for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > index) {
-                index = arr[i];
+            boolean flag = true;
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[j] > arr[i]) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag == true) {
+                return arr[i];
             }
         }
-        return index;
+        return -1;
+    }
+
+    static int largestEff(int arr[]) {
+        int res = 0;
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > arr[res]) {
+                res = i;
+            }
+        }
+        return res;
     }
 
     public static void main(String[] args) {
-        int arr[] = { 1, 4, 60, 90, 20 };
+        int arr[] = { 10, 60, 30, 100 };
         System.out.println(largestNaive(arr));
+        System.out.println(largestEff(arr));
     }
+
 }
